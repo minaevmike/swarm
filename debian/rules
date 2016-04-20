@@ -1,8 +1,8 @@
 #!/usr/bin/make -f
 
-DEB_DBG_PACKAGES := libswarm3-dbg
+DEB_DBG_PACKAGES := libswarm3-blackhole5-dbg
 
 include /usr/share/cdbs/1/class/cmake.mk
 include /usr/share/cdbs/1/rules/debhelper.mk
 
-DEB_MAKE_CHECK_TARGET = check
+#DEB_MAKE_CHECK_TARGET = check
