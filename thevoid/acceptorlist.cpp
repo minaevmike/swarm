@@ -76,14 +76,14 @@ void acceptors_list<Connection>::add_acceptor(const std::string &address)
 		auto local_endpoint = boost::lexical_cast<std::string>(acceptor->local_endpoint());
 
 		BH_LOG(data.logger, SWARM_LOG_INFO, "Started to listen address: %s, backlog: %d",
-				local_endpoint, data.backlog_size);
+				local_endpoint.c_str(), data.backlog_size);
 
 		local_endpoints.emplace_back(local_endpoint);
 		protocols.push_back(endpoint.protocol());
 
 		complete_socket_creation(endpoint);
 	} catch (boost::system::system_error &error) {
-		BH_LOG(data.logger, SWARM_LOG_ERROR, "Can not bind socket '%s': %s", address, error.what());
+		BH_LOG(data.logger, SWARM_LOG_ERROR, "Can not bind socket '%s': %s", address.c_str(), error.what());
 
 		acceptors.pop_back();
 		if (local_endpoints.size() > acceptors.size())

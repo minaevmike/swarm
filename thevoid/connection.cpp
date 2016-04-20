@@ -227,12 +227,12 @@ do { \
 	} \
 } while (0)
 
-static blackhole::log::attributes_t make_attributes(void *connection)
+static blackhole::attribute::set_t make_attributes(void *connection)
 {
 	char buffer[128];
 	snprintf(buffer, sizeof(buffer), "%p", connection);
 
-	blackhole::log::attributes_t attributes = {
+	blackhole::attribute::set_t attributes = {
 		blackhole::attribute::make(std::string("connection"), std::string(buffer))
 	};
 	return std::move(attributes);
@@ -937,11 +937,11 @@ void connection<T>::process_data()
 			} else {
 				CONNECTION_INFO(
 					"received new request: method: %s, url: %s, local: %s, remote: %s, headers: %s",
-					m_access_method.empty() ? "-" : m_access_method,
-					m_access_url.empty() ? "-" : m_access_url,
-					m_access_local,
-					m_access_remote,
-					headers_to_string(m_request.headers(), m_server->m_data->log_request_headers)
+					m_access_method.empty() ? "-" : m_access_method.c_str(),
+					m_access_url.empty() ? "-" : m_access_url.c_str(),
+					m_access_local.c_str(),
+					m_access_remote.c_str(),
+					headers_to_string(m_request.headers(), m_server->m_data->log_request_headers).c_str()
 				);
 
 				auto factory = m_server->factory(m_request);

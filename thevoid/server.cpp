@@ -53,7 +53,8 @@ namespace thevoid {
 class server_data;
 
 server_data::server_data(base_server *server) :
-	logger(base_logger, blackhole::log::attributes_t()),
+        base_logger(swarm::log_level::info),
+	logger(base_logger, swarm::utils::logger::default_attributes()),
 	connections_counter(0),
 	active_connections_counter(0),
 	server(server),
@@ -70,7 +71,6 @@ server_data::server_data(base_server *server) :
 	safe_mode(false),
 	options_parsed(false)
 {
-	swarm::utils::logger::init_attributes(base_logger);
 }
 
 server_data::~server_data()
@@ -244,7 +244,7 @@ bool base_server::initialize_logger(const rapidjson::Value &config)
 	> formatters_t;
 
 	auto &repository = blackhole::repository_t::instance();
-	repository.configure<sinks_t, formatters_t>();
+	repository.registrate<sinks_t, formatters_t>();
 
 	const dynamic_t &dynamic = repository::config::transformer_t<
 		rapidjson::Value
@@ -259,9 +259,7 @@ bool base_server::initialize_logger(const rapidjson::Value &config)
 
 	repository.add_config(log_config);
 
-	m_data->base_logger = repository.root<swarm::log_level>();
-	swarm::utils::logger::init_attributes(m_data->base_logger);
-	m_data->base_logger.verbosity(swarm::utils::logger::parse_level(level.GetString()));
+	m_data->base_logger = repository.create<blackhole::verbose_logger_t<swarm::log_level>>("root", swarm::utils::logger::parse_level(level.GetString()));
 
 	return true;
 }

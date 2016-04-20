@@ -11,7 +11,7 @@
             {
                 "formatter": {
                     "type": "string",
-                    "pattern": "[server 1] %(timestamp)s %(request_id)s/%(lwp)s/%(pid)s %(severity)s: %(message)s, %(...L)s"
+                    "pattern": "[server 1] %(timestamp)s %(request_id)s/%(tid)s/%(pid)s %(severity)s: %(message)s, %(...L)s"
                 },
                 "sink": {
                     "type": "files",
