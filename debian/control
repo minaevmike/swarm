@@ -82,7 +82,7 @@ Architecture: any
 Depends:
 	${shlibs:Depends},
 	${misc:Depends},
-	libswarm3 (= ${binary:Version}),
+	libswarm-sputnik3 (= ${binary:Version}),
 Description: TheVoid
 
 Package: libthevoid-sputnik3-dev
