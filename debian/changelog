@@ -1,3 +1,15 @@
+swarm-sputnik (3.5.0ubuntu1) utopic; urgency=medium
+
+  [ Autobuilder ]
+  * Fix rules
+
+  [ Vitaly Isaev ]
+  * Fixes broken dependency
+
+  [ Autobuilder ]
+
+ -- Autobuilder <autobuilder@corp.sputnik.ru>  Thu, 21 Apr 2016 14:57:20 +0300
+
 swarm-sputnik (3.5.0) unstable; urgency=low
 
     * Moving to blackhole-5 (Andrey Karpov, Mikhail Minaev)
